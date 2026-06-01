@@ -6,40 +6,79 @@ name: daniel-os
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/base-main
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
-modules:
-  - type: files
-    files:
-      - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+modules:
   - type: dnf
     repos:
       copr:
-        - atim/starship
+        - yalter/niri
+        - avengemedia/dms
     install:
       packages:
+        # wayland and compositor
+        - niri
+        - qt5-wayland
+        - qt6-wayland
+        - xwayland-satellite
+
+        # dankmaterialshell
+        - dms
+        - accountsservice
+        - cava
+        - matugen
+        - qt6ct
+        - qt6-qtmultimedia
+
+        # system utilities
+        - wl-clipboard
+        - distrobox
+        - alsa-firmware
+        - polkit
+        - dbus-tools
+        - wireplumber
+        - pipewire
+        - pulseaudio-utils
+
+        # network and bluetooth
+        - network-manager-applet
+        - bluez
+        - bluez-tools
+        - blueman
+        - NetworkManager-openvpn-gnome
+        - NetworkManager-openconnect-gnome
+
+        # file Management and media
+        - nautilus
+        - gvfs-mtp
+        - gvfs-smb
+        - ffmpeg
+        - pipewire-libs-extra
+        - gnome-keyring
+        - adw-gtk3-theme
+        - xdg-desktop-portal-gnome
+        - firacode-nerd-fonts
+
+        # cli tools
         - micro
-        - starship
-    remove:
-      packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        - fish
+        - eza
+        - bat
+        - kitty
 
-  - type: default-flatpaks
-    configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
-        scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+  # copies files/system/* (* means everything inside it) into your image's root folder /
+  - type: files
+    files:
+      - source: basics
+        destination: /
 
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  - type: justfiles
+    validate: false
+    include:
+      - config
+
+  - type: signing
