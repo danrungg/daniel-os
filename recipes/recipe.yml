@@ -28,6 +28,9 @@ modules:
 
         # dankmaterialshell
         - dms
+        - dms-greeter
+        - greetd
+        - acl
         - cava
         - matugen
         - qt6ct
@@ -57,6 +60,15 @@ modules:
         - eza
         - bat
         - kitty
+
+  - type: systemd
+    system:
+      enabled:
+        - greetd.service
+
+  - type: justfiles
+    include:
+      - postinstall.just
 
   # copies files/system/* (* means everything inside it) into your image's root folder /
   - type: files
