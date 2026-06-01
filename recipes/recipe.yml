@@ -41,7 +41,6 @@ modules:
         - polkit
         - dbus-tools
         - wireplumber
-        - pipewire
         - pulseaudio-utils
 
         # network and bluetooth
@@ -57,11 +56,9 @@ modules:
         - gvfs-mtp
         - gvfs-smb
         - ffmpeg
-        - pipewire-libs-extra
         - gnome-keyring
         - adw-gtk3-theme
         - xdg-desktop-portal-gnome
-        - firacode-nerd-fonts
 
         # cli tools
         - micro
@@ -75,10 +72,5 @@ modules:
     files:
       - source: basics
         destination: /
-
-  - type: justfiles
-    validate: false
-    include:
-      - config
 
   - type: signing
