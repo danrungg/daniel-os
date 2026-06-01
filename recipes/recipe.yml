@@ -22,30 +22,22 @@ modules:
       packages:
         # wayland and compositor
         - niri
-        - qt5-wayland
-        - qt6-wayland
+        - qt5-qtwayland
+        - qt6-qtwayland
         - xwayland-satellite
 
         # dankmaterialshell
         - dms
-        - accountsservice
         - cava
         - matugen
         - qt6ct
         - qt6-qtmultimedia
 
-        # system utilities
-        - wl-clipboard
-        - distrobox
-        - alsa-firmware
-        - polkit
+        # system utilities (only those not already in base-main)
         - dbus-tools
-        - wireplumber
-        - pulseaudio-utils
 
         # network and bluetooth
         - network-manager-applet
-        - bluez
         - bluez-tools
         - blueman
         - NetworkManager-openvpn-gnome
@@ -55,12 +47,11 @@ modules:
         - nautilus
         - gvfs-mtp
         - gvfs-smb
-        - ffmpeg
         - gnome-keyring
         - adw-gtk3-theme
         - xdg-desktop-portal-gnome
 
-        # cli tools
+        # tools
         - micro
         - fish
         - eza
