@@ -36,9 +36,6 @@ modules:
         - qt6ct
         - qt6-qtmultimedia
 
-        # system utilities (only those not already in base-main)
-        - dbus-tools
-
         # network and bluetooth
         - network-manager-applet
         - bluez-tools
