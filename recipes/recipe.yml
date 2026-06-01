@@ -61,7 +61,7 @@ modules:
   # copies files/system/* (* means everything inside it) into your image's root folder /
   - type: files
     files:
-      - source: basics
+      - source: system
         destination: /
 
   - type: signing
